@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8demo-deployment
+  namespace: demo  # Specify the namespace here
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: k8demo
+  template:
+    metadata:
+      labels:
+        app: k8demo
+    spec:
+      containers:
+      - name: k8demo
+        image: k8demo:latest
+        imagePullPolicy: Never  # Changed to Never since we're loading the image directly
+        ports:
+        - containerPort: 8080
